@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="fileUpload">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Paper Street Media Coding Challenge</title>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.4.1" data-semver="1.6.5" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="ng-file-upload-5.0.9.js"></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body ng-controller="MyCtrl">
+    <h2 class="ul">Paper Street Media Coding Challenge</h2>
+    <div class="row">
+      <a href="javascript:;" type="file" ngf-select="" ng-model="fileChosen" name="file" ngf-accept="image" required="" accept=".txt" ngf-max-height="1000" ngf-max-size="1MB"><label class="bold">Computer</label></a>
+    </div>
+    <div class="row">
+      <span class="wordwrap" ng-show="fileChosen != null">
+      {{ fileChosen.name }}
+      </span>
+    </div>
+    <div class="row" ng-show="fileChosen != null">
+      <label class="bold">Attachment Name</label>
+        <br />
+        <input type="text" ng-model="customFileName" style="margin-bottom: 5px;width: 285px;" />
+        <br />
+      <button class="button" ng-show="customFileName.length > 3" ng-click="setAttachments(fileChosen, customFileName);">Attach</button>    
+    </div>
+    
+    
+    <div class="row">
+    Drop Images:
+          <div ngf-drop="" ngf-select="" ng-model="image" class="drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" accept="image">
+            Drop images here or click to upload
+          </div>
+    </div>
+    <div class="row" ng-show="$scope.imageArray > 1">
+    Images:
+          <ul>
+        <li ng-repeat="f in $scope.imageArray" style="font:smaller">{{f.name}}</li>
+      </ul>
+
+    image: <pre>{{$scope.imageArray}}</pre>
+    Upload Log:
+          <pre>{{log}}</pre>
+    </div>
+  </body>
+
+</html>
