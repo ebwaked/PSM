@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html ng-app="fileUpload">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Paper Street Media Coding Challenge</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/app.js"></script>
+    <script src="Scripts/ng-file-upload.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-flow/2.5.1/ng-flow-standalone.min.js"></script>
+</head>
+
+<body ng-app="fileUpload" ng-controller="MyCtrl">
+
+    <h2 class="ul">Paper Street Media Coding Challenge</h2>
+
+    Add Images:
+    <div flow-init
+         flow-name="uploader.flow"
+         flow-files-added="processFiles($files)">
+        <button class="button" flow-btn type="file">Upload Images</button>
+        <div ng-repeat="image in uploader.flow.files track by $index">
+            <span class="text">Base64 image displayed with "ng-src"</span> <img class="preview" ng-src="{{images[$index].uri}}" />
+            <br />
+            <span>
+                Width:{{images[$index].width}}
+                <br />
+                Height:{{images[$index].height}}
+                <br />
+                Relative Path:{{images[$index].path}}
+            </span>
+        </div>
+    </div>
+
+    <span ng-show="images.length">
+        Images Array Length: {{images.length}}
+        <br />
+        <div ng-repeat="f in vm.imageArray">
+            Image name: {{f.name}}
+        </div>
+    </span>
+
+    <div>
+        Add comma delimetted tags for your image:
+        <input type="text" ng-model="vm.imageDetails" />
+    </div>
+
+    <div ng-show="$scope.imageDetailsArray.length > -1">
+        <div ng-repeat="f in $scope.imageDetailsArray">
+            Delimitted Value: {{f}}
+            <br />
+            Number in Array of delimitted tags: {{$scope.imageDetailsArray.length}}
+        </div>  
+    </div>
+
+    <!--<div ng-show="vm.imageDetails.length">
+        <div>
+            Add or Drop File:
+            <div ngf-select="uploadFiles($files)"
+                 ngf-model="$file"
+                 ngf-drop="uploadFiles($files)" class="drop-box"
+                 ngf-drag-over-class="'dragover'" ngf-multiple="false"
+                 ngf-pattern="'image/*,application/pdf'">Drop Images or PDFs files here</div>
+            <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+        </div>
+    </div>
+    <div ng-show="imageArray.length > 0">
+        Img Array Length: {{vm.imageArray.length}}
+        <br />
+        <div ng-repeat="f in vm.imageArray">
+            Img name: {{f.name}}
+        </div>
+    </div>-->
+    
+    <!--<div>
+        <div ng-repeat="f in $scope.imageArray">
+            Image thumbnail: <img ngf-thumbnail="f || '/thumb.jpg'">
+        </div>
+    </div>-->
+</body>
+
+</html>
